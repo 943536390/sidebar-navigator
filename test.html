@@ -12,21 +12,39 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>文档标题</title>
     <style type="text/css">
-    body {
-        position: relative;
-        overflow-x: hidden;
-    }
     body,
     html {
+    	font-size: 625%;
         height: 100%;
         background-color: #583e7e;
     }
+    body {
+    	font-size: 0.16rem;
+        position: relative;
+        overflow-x: hidden;
+    }
+    #wrapper {
+		padding-left: 0;
+		transition: all 0.2s; 
+    }
+    #wrapper.toggled {
+		padding-left: 220px;
+
+    }
+    /*-------------------------------*/
+    /*     Sidebar nav styles        */
+    /*-------------------------------*/
     #sidebar-wrapper {
+    	left: -220px;
     	overflow-x: hidden;
     	overflow-y: auto;
         background: #1a1a1a;
         height: 100%;
         width: 220px;
+        transition: all 0.2s;
+    }
+   #wrapper.toggled #sidebar-wrapper {
+    	left: 0;
     }
 
     .sidebar-nav li{
@@ -34,17 +52,19 @@
     	line-height: 20px;
     	width: 100%;  
     }
-    .sidebar-nav li :before{
+    .sidebar-nav li:before{
     	content: "";
     	position: absolute;
     	width: 2px;
     	height: 100%;
-    	background: #00f;
+    	
     	top: 0;
     	left: 0;
+    	transition: width 0.2s ease;
+    	z-index: -1;
     }
 
-	/*.sidebar-nav li:first-child a {
+	.sidebar-nav li:first-child a {
 	  background-color: #1a1a1a;
 	  color: #ffffff;
 	}
@@ -71,15 +91,75 @@
 	}
 	.sidebar-nav li:nth-child(9):before {
 	  background-color: #00FFFF;
-	}*/
+	}
 
-
-
-	.dropdown-menu{
-		background: #1a1a1a;
+	.sidebar-nav li:hover::before{
 		width: 100%;
+    }
+
+	.sidebar-nav li a:not(.sidebar-header){
+		padding: 10px 15px 10px 30px;
+    	color: #fff;
+    	font-size: 0.14rem;
+    }
+
+    
+
+    .sidebar-nav li a:hover,
+    .sidebar-nav li a:active,
+    .sidebar-nav li a:focus,
+    .sidebar-nav li.dropdown-title a:link,
+    .sidebar-nav li.dropdown-title a:hover,
+    .sidebar-nav li.dropdown-title a:active,
+    .sidebar-nav li.dropdown-title a:focus {
+		background: transparent;
+		color: #fff;
+    }
+   
+
+
+
+	.sidebar-nav > .sidebar-brand {
+		padding-left: 10px;
+		font-size: 0.2rem;
+		  height: 65px;
+		  line-height: 0.44rem;
+
+	}
+
+	.sidebar-nav .dropdown-menu {
+		position: relative;
+
+	  background-color: #222222;
+	  border-radius: 0;
+	  border: none;
+	  box-shadow: none;
+	  margin: 0;
+	  padding: 0;
+	  width: 100%;
 	}
 	
+	/*-------------------------------*/
+	/*       Hamburger-Cross         */
+	/*-------------------------------*/
+	.hamburger {
+		border: 2px solid red;
+		background: transparent;
+		outline: none;
+		padding: 0;
+
+	}
+
+	.hamburger span {
+		display: block;
+		width: 0.2rem;
+		height: 0.05rem;
+		padding-bottom: 0.08rem;
+		background-color: #fff;
+		border: 2px solid red;
+
+	}
+
 
 
 
@@ -87,11 +167,12 @@
 </head>
 
 <body>
-    <div id="wrapper">
+    <div id="wrapper" >
+    	 <!-- sidebar-wrapper -->
         <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper">
             <ul class="nav sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">Bootstrap 3</a>
+                    <a href="#" class="sidebar-header">Bootstrap 3</a>
                 </li>
                 <li>
                     <a href="#"> Home</a>
@@ -105,7 +186,7 @@
                 <li>
                     <a href="#">Third page</a>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown  dropdown-title">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> Dropdown <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="dropdown-header">Dropdown heading</li>
@@ -116,8 +197,52 @@
                         <li><a href="#">One more separated link</a></li>
                     </ul>
                 </li>
+                 <li>
+                    <a href="#"><i class="fa fa-fw fa-bank"></i> Page four</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-dropbox"></i> Page 5</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-twitter"></i> Last page</a>
+                </li>
             </ul>
         </nav>
+
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+          <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+            <span class="hamb-top"></span>
+            <span class="hamb-middle"></span>
+            <span class="hamb-bottom"></span>
+          </button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="page-header">Awesome Bootstrap 3 Sidebar Navigation</h1>  
+                        <p class="lead">Originally authored by <a href="http://bootsnipp.com/maridlcrmn" target="_blank">maridlcrmn</a> on Bootsnipp and then converted to Less and customized further by j_holtslander who is building a collection of great Bootstrap 3 navbars.</p>
+                        <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Aenean lacinia bibendum nulla sed consectetur. Nulla vitae elit libero, a pharetra augue.</p>
+                        <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum.</p>
+                        <p>Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Maecenas faucibus mollis interdum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean lacinia bibendum nulla sed consectetur.</p>
+                        <h3>A heading in the mix.</h3>
+                        <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Cras mattis consectetur purus sit amet fermentum. Curabitur blandit tempus porttitor. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+                        <blockquote>Maecenas sed diam eget risus varius blandit sit amet non magna. Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Aenean lacinia bibendum nulla sed consectetur. Nulla vitae elit libero, a pharetra augue.</blockquote>
+                        <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum.</p>
+                        <p>Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Maecenas faucibus mollis interdum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean lacinia bibendum nulla sed consectetur.</p>
+                        <h3>Another heading for typography's sake.</h3>
+                        <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Cras mattis consectetur purus sit amet fermentum. Curabitur blandit tempus porttitor. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+                        <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem malesuada magna mollis euismod. Aenean lacinia bibendum nulla sed consectetur. Nulla vitae elit libero, a pharetra augue.</p>
+                        <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum.</p>
+                        <p>Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Maecenas faucibus mollis interdum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean lacinia bibendum nulla sed consectetur.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+
     </div>
 </body>
 
